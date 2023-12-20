@@ -1,0 +1,63 @@
+import requests
+import urllib3
+import datetime
+import matplotlib.pyplot as plt
+import pandas as pd
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+auth_url = "https://www.strava.com/oauth/token"
+activites_url = "https://www.strava.com/api/v3/athlete/activities"
+
+payload = {
+    'client_id': "96392",
+    'client_secret': 'e5c44d0be804b506543fa42c2d36ce129a428ecf',
+    'refresh_token': 'cb5ca183a8f4f8b3341127e4b13f910fe9f75392',
+    'grant_type': "refresh_token",
+    'f': 'json'
+}
+
+#print("Requesting Token...\n")
+res = requests.post(auth_url, data=payload, verify=False)
+access_token = res.json()['access_token']
+#print("Access Token = {}\n".format(access_token))
+
+header = {'Authorization': 'Bearer ' + access_token}
+param = {'per_page': 200, 'page': 1}
+my_dataset = requests.get(activites_url, headers=header, params=param).json()
+
+types = []
+moving_times = []
+dates = []
+sessions = {}
+num_sessions = len(my_dataset)
+
+for i in range(num_sessions-1,-1,-1):
+    if my_dataset[i]['has_heartrate']:
+        sessions["session{0}".format(i)] = [my_dataset[i]['start_date'],my_dataset[i]['type'],my_dataset[i]['moving_time'],my_dataset[i]['average_heartrate']]
+    else:
+        sessions["session{0}".format(i)] = [my_dataset[i]['start_date'],my_dataset[i]['type'],my_dataset[i]['moving_time'],0]
+
+    m, s = divmod(my_dataset[i]['moving_time'], 60)
+    h, m = divmod(m, 60)
+    
+    moving_times.append(my_dataset[i]['moving_time'])
+    dates.append(my_dataset[i]['start_date'])
+    
+date_time = pd.to_datetime(dates)
+df = pd.DataFrame({'Date':date_time})
+df['Time']=df['Date'].dt.time
+df['Date']=df['Date'].dt.date
+df['Week']=df['Date'].apply(lambda x: str(x.isocalendar()[0])+"-"+str(x.isocalendar()[1]))
+print(df)
+df['Week']=df['Week'].apply(lambda x: datetime.datetime.strptime(x + '-1', "%Y-%W-%w"))
+df['Moving_Time'] = moving_times
+print(df)
+plt.figure(1)
+plt.bar(df.Week, df.Moving_Time)
+plt.gcf().autofmt_xdate()
+
+plt.figure(2)
+plt.bar(df.Date, df.Moving_Time)
+plt.gcf().autofmt_xdate()
+
+plt.show()
