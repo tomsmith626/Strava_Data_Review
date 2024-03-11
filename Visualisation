@@ -1,0 +1,14 @@
+import datetime
+import matplotlib.pyplot as plt
+import pandas as pd
+  
+
+plt.figure(1)
+plt.bar(df.Week, df.Moving_Time)
+plt.gcf().autofmt_xdate()
+
+plt.figure(2)
+plt.bar(df.Date, df.Moving_Time)
+plt.gcf().autofmt_xdate()
+
+plt.show()
