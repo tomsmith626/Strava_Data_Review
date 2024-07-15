@@ -1,1 +1,2 @@
-Just testing :)
+StravaImport.py is initial bones of project. Imports data from user's Strava and creates a simple
+graph of recent training volume.

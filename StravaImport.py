@@ -8,10 +8,14 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 auth_url = "https://www.strava.com/oauth/token"
 activites_url = "https://www.strava.com/api/v3/athlete/activities"
 
+client_id = input("Enter your client ID: ")
+client_secret = input("Enter your client secret: ")
+refresh_token = input("Enter your refresh token: ")
+
 payload = {
-    'client_id': "96392",
-    'client_secret': 'e5c44d0be804b506543fa42c2d36ce129a428ecf',
-    'refresh_token': 'cb5ca183a8f4f8b3341127e4b13f910fe9f75392',
+    'client_id': client_id,
+    'client_secret': client_secret,
+    'refresh_token': refresh_token,
     'grant_type': "refresh_token",
     'f': 'json'
 }
@@ -60,6 +64,7 @@ df['Moving_Time'] = moving_times
 df['Distance'] = distances
 print(df.head())
 print(sessions)
+
 
 plt.figure(1)
 plt.bar(df.Week, df.Moving_Time)
