@@ -1,0 +1,21 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# read csv of data, sort by date
+df = pd.read_csv("wellnessData.csv")
+df.rename(columns={"Unnamed: 0":"Date"}, inplace=True)
+df.set_index("Date", inplace=True)
+df.sort_index(inplace=True)
+
+# plot data
+"""
+Could add:
+Slider for how far back to go
+tickboxes for which metrics to view
+
+"""
+fig, ax1 = plt.subplots(figsize = (10, 10))
+ax2 = ax1.twinx()
+df[["Zone 1","Zone 2","Zone 3","Zone 4", "Zone 5"]].plot(kind="bar", ax=ax1)
+df[["RHR"]].plot(ax=ax2)
+plt.show()

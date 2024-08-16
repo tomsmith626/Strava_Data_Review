@@ -154,8 +154,7 @@ url = f"{api.garmin_connect_rhr_url}/{api.display_name}"
 rhrData = api.connectapi(url, params=params)
 
 rhrDF = pd.DataFrame(rhrData["allMetrics"]["metricsMap"]['WELLNESS_RESTING_HEART_RATE']).set_index("calendarDate")
-#plot = rhrDF.plot(title="Resting Heart Rate", xlabel="Date", ylabel="Heart Rate")
-#plt.show()
+rhrDF.rename(columns={"value":"RHR"}, inplace=True)
 
 """
 Save time in zones for each day to a df
@@ -175,14 +174,23 @@ for activity in totalTimeInZones:
     activityZones = []
     for zone in activity[1]:
         activityZones.append(zone["secsInZone"])
-    date = datetime.datetime.strptime(activity[0], "%Y-%m-%d %H:%M:%S").date()
+    date = str(datetime.datetime.strptime(activity[0], "%Y-%m-%d %H:%M:%S").date())
     if date in timeInZonesDict.keys():
         for num,i in enumerate(timeInZonesDict[date]):
             timeInZonesDict[date][num]+=activityZones[num]
     else:
-        timeInZonesDict[date]=activityZones
+        if activityZones:
+            timeInZonesDict[date]=activityZones
 
 timeInZonesDF = pd.DataFrame.from_dict(timeInZonesDict).transpose()
-print(timeInZonesDF)
+timeInZonesDF.rename(columns={0:"Zone 1",1:"Zone 2",2:"Zone 3",3:"Zone 4",4:"Zone 5"}, inplace=True)
 
-wellnessData = pd.concat([timeInZonesDF, rhrDF]).to_csv("wellnessData.csv")
+"""
+Potential data to view trends:
+Sleep?
+HRV status?
+"""
+
+# Keep this at the bottom of the file and concat all data fields that get added in the future
+wellnessData = pd.concat([timeInZonesDF,rhrDF], axis=1).fillna(0)
+wellnessData.to_csv("wellnessData.csv")

@@ -1,3 +1,10 @@
+GARMIN EXTRACT:
+Use GarminExtract.py to extract data, GarminVisualisation.py to visualise
+Current W.I.P. - extract more data e.g. HRV, deal with 0 RHR recordings appropriately
+Would be nice:
+    ML Analysis of trends - training load affect on sleep, RHR etc.
+
+STRAVA EXTRACT:
 StravaImport.py is initial bones of project. Imports data from user's Strava and creates a simple
 graph of recent training volume.
 
