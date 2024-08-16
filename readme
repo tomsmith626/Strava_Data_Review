@@ -12,3 +12,5 @@ To use, make a text file called "client_info" where line one is client id, line 
 and line 4 is your authorisation token, obtained by replacing this link with your information:
 https://www.strava.com/oauth/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_CALLBACK_URL&approval_prompt=force&scope=read_all,activity:read_all,profile:read_all
 (your callback URL can just be "https://localhost")
+
+"manual access token" - to avoid having to re-obtain authorisation code, once an access code has been obtained, can manually overwrite the access_token variable in this version of file
