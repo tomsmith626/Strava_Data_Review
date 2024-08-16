@@ -8,24 +8,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 auth_url = "https://www.strava.com/oauth/token"
 activities_url = "https://www.strava.com/api/v3/athlete/activities"
+activity_url = "https://www.strava.com/api/v3/activities"
 
-client_info = open("client_info.txt", "r")
-
-client_id = client_info.readline().rstrip()
-client_secret = client_info.readline().rstrip()
-refresh_token = client_info.readline().rstrip()
-authorization_code = client_info.readline().rstrip()
-
-payload = {
-    'client_id': client_id,
-    'client_secret': client_secret,
-    'grant_type': 'authorization_code',
-    'code': authorization_code,
-}
-
-res = requests.post(auth_url, data=payload, verify=False)
-print(res.json())
-access_token = res.json()['access_token']
+access_token = "2c58aa3beafbbb1528ee3a74b0611a4a881f7d54"
 
 header = {'Authorization': 'Bearer ' + access_token}
 param = {'per_page': 200, 'page': 5}
@@ -33,10 +18,11 @@ param = {'per_page': 200, 'page': 5}
 my_dataset = requests.get(activities_url, headers=header, params=param).json()
 print(json.dumps(my_dataset[8], indent=4))
 
-res1 = requests.get(activities_url+"/8306474917", headers=header)
+res1 = requests.get(f"{activity_url}/8345805895",headers=header)
+print(res1.status_code)
 print(json.dumps(res1.json(), indent=4))
 
-res2 = requests.get(activities_url+"/8306474917/zones", headers=header)#, params=param.json())
+res2 = requests.get(f"{activity_url}/8345805895/zones", headers=header)#, params=param.json())
 print(json.dumps(res2.json(), indent=4))
 
 #res2 = requests.get("https://www.strava.com/api/v3/athlete/zones", headers=header)

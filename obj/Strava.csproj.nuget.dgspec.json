@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tom\\Documents\\GitHub\\Strava\\Strava.csproj": {}
+    "C:\\Users\\Tom\\Documents\\GitHub\\Strava_Data_Review\\Strava.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tom\\Documents\\GitHub\\Strava\\Strava.csproj": {
+    "C:\\Users\\Tom\\Documents\\GitHub\\Strava_Data_Review\\Strava.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tom\\Documents\\GitHub\\Strava\\Strava.csproj",
+        "projectUniqueName": "C:\\Users\\Tom\\Documents\\GitHub\\Strava_Data_Review\\Strava.csproj",
         "projectName": "Strava",
-        "projectPath": "C:\\Users\\Tom\\Documents\\GitHub\\Strava\\Strava.csproj",
+        "projectPath": "C:\\Users\\Tom\\Documents\\GitHub\\Strava_Data_Review\\Strava.csproj",
         "packagesPath": "C:\\Users\\Tom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tom\\Documents\\GitHub\\Strava\\obj\\",
+        "outputPath": "C:\\Users\\Tom\\Documents\\GitHub\\Strava_Data_Review\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Tom\\AppData\\Roaming\\NuGet\\NuGet.Config"

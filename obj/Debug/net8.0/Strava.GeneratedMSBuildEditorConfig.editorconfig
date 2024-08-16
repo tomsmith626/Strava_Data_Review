@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Strava
-build_property.ProjectDir = C:\Users\Tom\Documents\GitHub\Strava\
+build_property.ProjectDir = C:\Users\Tom\Documents\GitHub\Strava_Data_Review\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
